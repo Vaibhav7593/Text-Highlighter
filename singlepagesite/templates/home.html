@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}/">
+</head>
+
+<body>
+    <h1>Welcome</h1>
+    <hr>
+    <h2>Please enter the text and select the index to highlight the text.</h2>
+    <hr>
+
+    <form name="textform">
+        <br>
+        <textarea name="textarea" id="textarea" cols="88" rows="11"
+            placeholder="Please write your text here....."></textarea>
+
+        <input type="number" name="start" id="start" placeholder="Start Index" value="{{start}}">
+
+        <input type="number" name="end" id="end" placeholder="End Index" value="{{end}}">
+
+        <input type="submit" class="button" id="submit" value="Click to show highlighted text" formaction="/homepage/">
+
+    </form>
+    <h3>{{message}}</h3>
+    <br>
+    <div class="container">
+
+        <span id="final">{{text}}</span>
+
+    </div>
+</body>
+
+</html>
+<script>
+
+    var st = document.getElementById('start').value;
+    var en = document.getElementById('end').value;
+    end = Number(en) + 1;
+    var els_f = document.getElementById('final');
+    var htmlText = els_f.innerHTML;
+    var redText = htmlText.substring(st, end);
+
+    els_f.innerHTML = htmlText.substring(0, st) + "<a style='color:beige;'>" + redText + "</a>" + htmlText.substring(end);
+    document.getElementById('textarea').value = htmlText;
+
+</script>
